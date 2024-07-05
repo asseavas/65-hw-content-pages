@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 const Toolbar = () => {
   return (
-    <nav className="navbar bg-light-subtle py-3">
+    <nav className="navbar bg-light-subtle py-4">
       <div className="container">
         <NavLink to="/" className="navbar-brand">
           <h4 className="text-uppercase m-0">Countries</h4>
@@ -41,6 +41,11 @@ const Toolbar = () => {
           <li className="nav-item">
             <NavLink className="nav-link" to="/pages/moscow">
               Moscow
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/pages/admin">
+              Admin
             </NavLink>
           </li>
         </ul>

@@ -1,42 +1,38 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import axiosApi from '../../axiosApi';
-import { ApiContentList, Content } from '../../types';
+import { Content } from '../../types';
 import Spinner from '../../components/Spinner/Spinner';
-import Pages from '../../components/Pages/Pages';
+import ContentItem from '../../components/ContentItem/ContentItem';
 
 const ContentPage = () => {
-  const [pages, setPages] = useState<Content[]>([]);
+  const { pageName } = useParams();
+  const [page, setPage] = useState<Content | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const fetchPages = useCallback(async () => {
+  const fetchPage = useCallback(async () => {
     setLoading(true);
     try {
-      setLoading(true);
-      const { data: pages } = await axiosApi.get<ApiContentList | null>(
-        '/pages.json',
-      );
+      let pageUrl = '/pages/home.json';
 
-      if (!pages) {
-        setPages([]);
-      } else {
-        const newPages = Object.keys(pages).map((id) => ({
-          ...pages[id],
-          id,
-        }));
-
-        setPages(newPages);
+      if (pageName) {
+        pageUrl = `/pages/${pageName}.json`;
       }
+
+      const { data: page } = await axiosApi.get<Content | null>(pageUrl);
+
+      setPage(page);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [pageName]);
 
   useEffect(() => {
-    void fetchPages();
-  }, [fetchPages]);
+    void fetchPage();
+  }, [fetchPage]);
 
   return (
-    <div>
+    <div className="container pt-4">
       {loading ? (
         <div
           className="d-flex justify-content-center align-items-center"
@@ -44,8 +40,14 @@ const ContentPage = () => {
         >
           <Spinner />
         </div>
+      ) : page ? (
+        <ContentItem
+          image={page.image}
+          title={page.title}
+          content={page.content}
+        ></ContentItem>
       ) : (
-        <Pages contentPages={pages} />
+        <h1 className="text-center">Page not found!</h1>
       )}
     </div>
   );
