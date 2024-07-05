@@ -44,6 +44,11 @@ const Toolbar = () => {
             </NavLink>
           </li>
           <li className="nav-item">
+            <NavLink className="nav-link" to="/pages/dubai">
+              Dubai
+            </NavLink>
+          </li>
+          <li className="nav-item">
             <NavLink className="nav-link" to="/pages/admin">
               Admin
             </NavLink>

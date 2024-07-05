@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import ContentPage from './containers/ContentPage/ContentPage';
 import Toolbar from './components/Toolbar/Toolbar';
-import './App.css';
 import AdminForm from './containers/AdminForm/AdminForm';
+import './App.css';
 
 const App = () => {
   return (

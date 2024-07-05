@@ -107,6 +107,7 @@ const AdminForm = () => {
             <option value="tokyo">Tokyo</option>
             <option value="shanghai">Shanghai</option>
             <option value="seoul">Seoul</option>
+            <option value="dubai">Dubai</option>
             <option value="moscow">Moscow</option>
             <option value="new-york">New York</option>
           </select>
